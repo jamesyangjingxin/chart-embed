@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canada Public Sector Employment (Persons in Thousands) </title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;background:#f4f1eb}
+  body{display:flex;align-items:center;justify-content:center;padding:20px 24px 28px;font-family:'Plus Jakarta Sans',sans-serif}
+  .wrap{width:100%;max-width:460px}
+  .chart-wrap{position:relative;height:460px}
+  canvas{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="chart-wrap"><canvas id="c"></canvas></div>
+</div>
+<script>
+(function(){
+  // Restore function callbacks serialised as strings
+  function restoreFns(obj){
+    if(!obj||typeof obj!=='object') return;
+    for(var k in obj){
+      if(typeof obj[k]==='string'&&obj[k].startsWith('__FN__')){
+        var src=obj[k].slice(6,obj[k].length-6);
+        try{ obj[k]=new Function('return ('+src+')')(); }catch(e){}
+      } else { restoreFns(obj[k]); }
+    }
+  }
+  var cfg={
+  "type": "line",
+  "data": {
+    "labels": [
+      "Jan-25",
+      "Feb-25",
+      "Mar-25",
+      "Apr-25",
+      "May-25",
+      "Jun-25",
+      "Jul-25",
+      "Aug-25",
+      "Sep-25",
+      "Oct-25",
+      "Nov-25",
+      "Dec-25",
+      "Jan-26"
+    ],
+    "datasets": [
+      {
+        "type": "line",
+        "label": "Public sector employees",
+        "data": [
+          4534,
+          4571,
+          4551,
+          4586,
+          4571,
+          4614,
+          4382,
+          4349,
+          4598,
+          4601,
+          4618,
+          4612,
+          4602
+        ],
+        "backgroundColor": "#1a56dbcc",
+        "borderColor": "#1a56db",
+        "borderWidth": 2.5,
+        "tension": 0.4,
+        "fill": false,
+        "pointRadius": 4,
+        "pointHoverRadius": 6,
+        "borderRadius": 0,
+        "borderSkipped": false
+      }
+    ]
+  },
+  "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "interaction": {
+      "mode": "index",
+      "intersect": false
+    },
+    "plugins": {
+      "legend": {
+        "display": true,
+        "position": "top",
+        "align": "start",
+        "labels": {
+          "color": "#374151",
+          "font": {
+            "family": "'Plus Jakarta Sans',sans-serif",
+            "size": 12,
+            "weight": "500"
+          },
+          "padding": 16,
+          "boxWidth": 10,
+          "boxHeight": 10,
+          "usePointStyle": true
+        }
+      },
+      "title": {
+        "display": true,
+        "text": "Canada Public Sector Employment (Persons in Thousands) ",
+        "color": "#374151",
+        "font": {
+          "family": "'Plus Jakarta Sans',sans-serif",
+          "size": 14,
+          "weight": "700"
+        },
+        "padding": {
+          "bottom": 18
+        },
+        "align": "start"
+      },
+      "tooltip": {
+        "backgroundColor": "#fff",
+        "titleColor": "#111827",
+        "bodyColor": "#4b5563",
+        "borderColor": "#e1e4ea",
+        "borderWidth": 1,
+        "padding": 10,
+        "titleFont": {
+          "family": "'Plus Jakarta Sans',sans-serif",
+          "weight": "700",
+          "size": 12
+        },
+        "bodyFont": {
+          "family": "'Plus Jakarta Sans',sans-serif",
+          "size": 11
+        },
+        "callbacks": {}
+      },
+      "sourcePlugin": {
+        "text": "Source: Statistics Canada",
+        "color": "#9ca3af"
+      }
+    },
+    "scales": {
+      "x": {
+        "axis": "x",
+        "grid": {
+          "display": true,
+          "color": "rgba(0,0,0,0.07)",
+          "lineWidth": 1,
+          "drawOnChartArea": true,
+          "drawTicks": true,
+          "tickLength": 8,
+          "tickWidth": "__FN__(t,e)=>e.lineWidth__FN__",
+          "tickColor": "__FN__(t,e)=>e.color__FN__",
+          "offset": false
+        },
+        "ticks": {
+          "color": "#374151",
+          "font": {
+            "family": "'Plus Jakarta Sans',sans-serif",
+            "size": 11
+          },
+          "callback": "__FN__function Ia(t){var e=this.getLabels();return 0<=t&&t<e.length?e[t]:t}__FN__",
+          "minRotation": 0,
+          "maxRotation": 50,
+          "mirror": false,
+          "textStrokeWidth": 0,
+          "textStrokeColor": "",
+          "padding": 3,
+          "display": true,
+          "autoSkip": true,
+          "autoSkipPadding": 3,
+          "labelOffset": 0,
+          "minor": {},
+          "major": {},
+          "align": "center",
+          "crossAlign": "near",
+          "showLabelBackdrop": false,
+          "backdropColor": "rgba(255, 255, 255, 0.75)",
+          "backdropPadding": 2
+        },
+        "border": {
+          "color": "transparent",
+          "display": true,
+          "dash": [],
+          "dashOffset": 0,
+          "width": 1
+        },
+        "type": "category",
+        "display": true,
+        "offset": false,
+        "reverse": false,
+        "beginAtZero": false,
+        "bounds": "ticks",
+        "clip": true,
+        "grace": 0,
+        "title": {
+          "display": false,
+          "text": "",
+          "padding": {
+            "top": 4,
+            "bottom": 4
+          },
+          "color": "#666"
+        },
+        "id": "x",
+        "position": "bottom"
+      },
+      "y": {
+        "axis": "y",
+        "grid": {
+          "display": true,
+          "color": "rgba(0,0,0,0.07)",
+          "lineWidth": 1,
+          "drawOnChartArea": true,
+          "drawTicks": true,
+          "tickLength": 8,
+          "tickWidth": "__FN__(t,e)=>e.lineWidth__FN__",
+          "tickColor": "__FN__(t,e)=>e.color__FN__",
+          "offset": false
+        },
+        "ticks": {
+          "color": "#374151",
+          "font": {
+            "family": "'Plus Jakarta Sans',sans-serif",
+            "size": 11
+          },
+          "callback": "__FN__numeric(t,e,i){if(0===t)return\"0\";var s=this.chart.options.locale;let a,n=t;if(1<i.length){const e=Math.max(Math.abs(i[0].value),Math.abs(i[i.length-1].value));(e<1e-4||1e15<e)&&(a=\"scientific\"),n=function(t){let e=3<i.length?i[2].value-i[1].value:i[1].value-i[0].value;return e=1<=Math.abs(e)&&t!==Math.floor(t)?t-Math.floor(t):e}(t)}var o=r(Math.abs(n)),o=isNaN(o)?1:Math.max(Math.min(-1*Math.floor(o),20),0),o={notation:a,minimumFractionDigits:o,maximumFractionDigits:o};return Object.assign(o,this.options.ticks.format),de(t,s,o)}__FN__",
+          "minRotation": 0,
+          "maxRotation": 50,
+          "mirror": false,
+          "textStrokeWidth": 0,
+          "textStrokeColor": "",
+          "padding": 3,
+          "display": true,
+          "autoSkip": true,
+          "autoSkipPadding": 3,
+          "labelOffset": 0,
+          "minor": {},
+          "major": {},
+          "align": "center",
+          "crossAlign": "near",
+          "showLabelBackdrop": false,
+          "backdropColor": "rgba(255, 255, 255, 0.75)",
+          "backdropPadding": 2
+        },
+        "border": {
+          "dash": [
+            4,
+            4
+          ],
+          "color": "transparent",
+          "display": true,
+          "dashOffset": 0,
+          "width": 1
+        },
+        "type": "linear",
+        "display": true,
+        "offset": false,
+        "reverse": false,
+        "beginAtZero": false,
+        "bounds": "ticks",
+        "clip": true,
+        "grace": 0,
+        "title": {
+          "display": false,
+          "text": "",
+          "padding": {
+            "top": 4,
+            "bottom": 4
+          },
+          "color": "#666"
+        },
+        "id": "y",
+        "position": "left"
+      }
+    },
+    "animation": {
+      "duration": 650,
+      "easing": "easeInOutCubic"
+    },
+    "layout": {
+      "padding": {
+        "bottom": 22,
+        "left": 4,
+        "right": 4,
+        "top": 4
+      }
+    }
+  }
+};
+  restoreFns(cfg);
+  // Source caption plugin
+  Chart.register({
+    id:'sourcePlugin',
+    afterDraw:function(chart){
+      var p=chart.options.plugins.sourcePlugin;
+      if(!p||!p.text) return;
+      var ctx=chart.ctx,h=chart.height,cl=chart.chartArea.left;
+      ctx.save();
+      ctx.font="11px 'Plus Jakarta Sans',sans-serif";
+      ctx.fillStyle=p.color||'#9ca3af';
+      ctx.textAlign='left';
+      ctx.fillText(p.text,cl,h-6);
+      ctx.restore();
+    }
+  });
+  new Chart(document.getElementById('c'),cfg);
+})();
+</script>
+</body>
+</html>
