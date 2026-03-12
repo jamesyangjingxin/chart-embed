@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Public sector employees in Canada (persons in thousands)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:transparent;overflow:hidden}
+  body{width:100%;margin:0;padding:0;overflow:hidden;background:transparent;font-family:Arial,sans-serif}
+  #scale-wrap{width:760px;padding:16px 20px 24px;background:transparent}
+  .chart-wrap{position:relative;height:460px}
+  canvas{display:block}
+</style>
+</head>
+<body>
+<div id="scale-wrap">
+  <div class="chart-wrap"><canvas id="c"></canvas></div>
+</div>
+<script>
+(function(){
+  function restoreFns(obj){
+    if(!obj||typeof obj!=='object') return;
+    for(var k in obj){
+      if(typeof obj[k]==='string'&&obj[k].startsWith('__FN__')){
+        var src=obj[k].slice(6,obj[k].length-6);
+        try{ obj[k]=new Function('return ('+src+')')(); }catch(e){}
+      } else { restoreFns(obj[k]); }
+    }
+  }
+  var cfg={
+  "type": "line",
+  "data": {
+    "labels": [
+      "2005",
+      "2006",
+      "2007",
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "datasets": [
+      {
+        "type": "line",
+        "label": "Number of Employees (Thousands)",
+        "data": [
+          3113,
+          3139,
+          3209,
+          3295,
+          3348,
+          3393,
+          3402,
+          3405,
+          3452,
+          3457,
+          3515,
+          3514,
+          3582,
+          3655,
+          3734,
+          3730,
+          4030,
+          4204,
+          4304,
+          4465,
+          4549
+        ],
+        "backgroundColor": "#1a56db33",
+        "borderColor": "#1a56db",
+        "borderWidth": 2.5,
+        "tension": 0.4,
+        "fill": true,
+        "pointRadius": 4,
+        "pointHoverRadius": 6,
+        "borderRadius": 0,
+        "borderSkipped": false
+      }
+    ]
+  },
+  "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "interaction": {
+      "mode": "index",
+      "intersect": false
+    },
+    "plugins": {
+      "legend": {
+        "display": true,
+        "position": "top",
+        "align": "start",
+        "labels": {
+          "color": "#1f2937",
+          "font": {
+            "family": "Arial, sans-serif",
+            "size": 12,
+            "weight": "500"
+          },
+          "padding": 16,
+          "boxWidth": 10,
+          "boxHeight": 10,
+          "usePointStyle": true
+        }
+      },
+      "title": {
+        "display": true,
+        "text": "Public sector employees in Canada (persons in thousands)",
+        "color": "#111827",
+        "font": {
+          "family": "Arial, sans-serif",
+          "size": 21,
+          "weight": "bold"
+        },
+        "padding": {
+          "bottom": 20
+        },
+        "align": "start"
+      },
+      "tooltip": {
+        "backgroundColor": "#fff",
+        "titleColor": "#111827",
+        "bodyColor": "#4b5563",
+        "borderColor": "#e1e4ea",
+        "borderWidth": 1,
+        "padding": 10,
+        "titleFont": {
+          "family": "Arial, sans-serif",
+          "weight": "bold",
+          "size": 12
+        },
+        "bodyFont": {
+          "family": "Arial, sans-serif",
+          "size": 11
+        },
+        "callbacks": {}
+      },
+      "sourcePlugin": {
+        "text": "Source: Statistics Canada",
+        "color": "#9ca3af"
+      }
+    },
+    "scales": {
+      "x": {
+        "axis": "x",
+        "grid": {
+          "display": true,
+          "color": "rgba(0,0,0,0.07)",
+          "lineWidth": 1,
+          "drawOnChartArea": true,
+          "drawTicks": true,
+          "tickLength": 8,
+          "offset": false
+        },
+        "ticks": {
+          "color": "#1f2937",
+          "font": {
+            "family": "Arial, sans-serif",
+            "size": 11
+          },
+          "minRotation": 0,
+          "maxRotation": 50,
+          "mirror": false,
+          "textStrokeWidth": 0,
+          "textStrokeColor": "",
+          "padding": 3,
+          "display": true,
+          "autoSkip": true,
+          "autoSkipPadding": 3,
+          "labelOffset": 0,
+          "minor": {},
+          "major": {},
+          "align": "center",
+          "crossAlign": "near",
+          "showLabelBackdrop": false,
+          "backdropColor": "rgba(255, 255, 255, 0.75)",
+          "backdropPadding": 2
+        },
+        "border": {
+          "color": "transparent",
+          "display": true,
+          "dash": [],
+          "dashOffset": 0,
+          "width": 1
+        },
+        "type": "category",
+        "display": true,
+        "offset": false,
+        "reverse": false,
+        "beginAtZero": false,
+        "bounds": "ticks",
+        "clip": true,
+        "grace": 0,
+        "title": {
+          "display": false,
+          "text": "",
+          "padding": {
+            "top": 4,
+            "bottom": 4
+          },
+          "color": "#666"
+        },
+        "id": "x",
+        "position": "bottom"
+      },
+      "y": {
+        "axis": "y",
+        "grid": {
+          "display": true,
+          "color": "rgba(0,0,0,0.07)",
+          "lineWidth": 1,
+          "drawOnChartArea": true,
+          "drawTicks": true,
+          "tickLength": 8,
+          "offset": false
+        },
+        "ticks": {
+          "color": "#1f2937",
+          "font": {
+            "family": "Arial, sans-serif",
+            "size": 11
+          },
+          "minRotation": 0,
+          "maxRotation": 50,
+          "mirror": false,
+          "textStrokeWidth": 0,
+          "textStrokeColor": "",
+          "padding": 3,
+          "display": true,
+          "autoSkip": true,
+          "autoSkipPadding": 3,
+          "labelOffset": 0,
+          "minor": {},
+          "major": {},
+          "align": "center",
+          "crossAlign": "near",
+          "showLabelBackdrop": false,
+          "backdropColor": "rgba(255, 255, 255, 0.75)",
+          "backdropPadding": 2
+        },
+        "border": {
+          "dash": [
+            4,
+            4
+          ],
+          "color": "transparent",
+          "display": true,
+          "dashOffset": 0,
+          "width": 1
+        },
+        "grace": "10%",
+        "type": "linear",
+        "display": true,
+        "offset": false,
+        "reverse": false,
+        "beginAtZero": false,
+        "bounds": "ticks",
+        "clip": true,
+        "title": {
+          "display": false,
+          "text": "",
+          "padding": {
+            "top": 4,
+            "bottom": 4
+          },
+          "color": "#666"
+        },
+        "id": "y",
+        "position": "left"
+      }
+    },
+    "animation": {
+      "duration": 650,
+      "easing": "easeInOutCubic"
+    },
+    "layout": {
+      "padding": {
+        "bottom": 28,
+        "left": 4,
+        "right": 4,
+        "top": 8
+      }
+    }
+  }
+};
+  restoreFns(cfg);
+  Chart.register({
+    id:'sourcePlugin',
+    afterDraw:function(chart){
+      var p=chart.options.plugins.sourcePlugin;
+      if(!p||!p.text) return;
+      var ctx=chart.ctx,h=chart.height,cl=chart.chartArea.left;
+      ctx.save();
+      ctx.font="11px Arial,sans-serif";
+      ctx.fillStyle=p.color||'#9ca3af';
+      ctx.textAlign='left';
+      ctx.fillText(p.text,cl,h-8);
+      ctx.restore();
+    }
+  });
+  new Chart(document.getElementById('c'),cfg);
+})();
+</script>
+<script>
+  (function(){
+    var NATURAL_W = 760;
+    var wrap = document.getElementById('scale-wrap');
+    function rescale(){
+      var vw = window.innerWidth;
+      if(vw >= NATURAL_W){ wrap.style.transform=''; wrap.style.transformOrigin=''; document.body.style.height=''; return; }
+      var scale = vw / NATURAL_W;
+      wrap.style.transformOrigin = 'top left';
+      wrap.style.transform = 'scale(' + scale + ')';
+      // shrink body height so iframe doesn't show empty space below
+      document.body.style.height = Math.round((460 + 40) * scale) + 'px';
+    }
+    rescale();
+    window.addEventListener('resize', rescale);
+  })();</script>
+</body>
+</html>
